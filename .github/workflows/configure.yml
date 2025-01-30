@@ -18,10 +18,10 @@ jobs:
       - name: Login to Docker Hub
         run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
       - name: Build Docker Image
-        run: docker build -t Vigneshragu10/Docker_chatpdf ./Docker_chatpdf
+        run: docker build -t Vigneshragu10/chatpdf ./chatpdf
 
       - name: Publish image to docker hub
-        run: docker push Vigneshragu10/Docker-chatpdf:latest
+        run: docker push Vigneshragu10/chatpdf:latest
 
   deploy:
     needs: build
@@ -34,8 +34,8 @@ jobs:
       - name: Remove cache memory
         run: sudo docker system prune -a -f
       - name: Pull image from Docker Hub
-        run: sudo docker pull Vigneshraghu10/Docker_chatpdf:latest
+        run: sudo docker pull Vigneshraghu10/chatpdf:latest
       - name: Delete Old Container
-        run: sudo docker rm -f Docker_hatpdf 2>/dev/null || true
+        run: sudo docker rm -f chatpdf2>/dev/null || true
       - name: Run Docker container
-        run: sudo docker run -d -p 8080:8080 --name Docker_chatpdf Vigneshraghu10/Docker_chatpdf
+        run: sudo docker run -d -p 8080:8080 --name chatpdf Vigneshraghu10/chatpdf
