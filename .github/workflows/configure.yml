@@ -16,25 +16,25 @@ jobs:
           docker system prune -af
           docker volume prune -f
       - name: Login to Docker Hub
-        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
       - name: Build Docker Image
         run: docker build -t smatificia/smatificia-chatpdf .
       - name: Publish image to docker hub
-        run: docker push smatificia/smatificia-chatpdf:latest   
+        run: docker push smatificia/smatificia-chatpdf:latest
 
   deploy:
     needs: build
-    runs-on: self-hosted    
+    runs-on: self-hosted
     steps:
-      - name: remove all existing containers
+      - name: Remove all existing containers
         run: |
           sudo docker stop $(sudo docker ps -aq) || true
           sudo docker rm -f $(sudo docker ps -aq) || true
-      - name: remove cache memory
+      - name: Remove cache memory
         run: sudo docker system prune -a -f
-      - name: Pull image from docker hub
+      - name: Pull image from Docker Hub
         run: sudo docker pull smatificia/smatificia-chatpdf:latest
       - name: Delete Old Container
         run: sudo docker rm -f Chatpdf 2>/dev/null || true
-      - name: Run docker container
+      - name: Run Docker container
         run: sudo docker run -d -p 8080:8080 --name Chatpdf smatificia/smatificia-chatpdf
