@@ -568,8 +568,6 @@ if __name__ == '__main__':
     Config.TEMP_FOLDER.mkdir(parents=True, exist_ok=True)
 
     # Start the Flask application
-<<<<<<< HEAD
+
     app.run(debug=True, port=8080)
-=======
-    app.run(debug=True, port=8080)
->>>>>>> 340bc2c7 (first commit)
+
