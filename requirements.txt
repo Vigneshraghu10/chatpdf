@@ -14,5 +14,4 @@ chromadb
 sentence-transformers
 docx2txt
 python-docx
-unicorn[standard]
-asgrief
+gunicorn
