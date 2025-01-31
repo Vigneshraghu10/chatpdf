@@ -2,7 +2,8 @@ version: '3'
 
 services:
   chatpdf:
-    image: ${{ secrets.DOCKER_USERNAME }}/chatpdf:latest
+    image: vigneshraghu/chatpdf:latest
+
     container_name: chatpdf
     restart: unless-stopped
     ports:
