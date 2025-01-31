@@ -64,12 +64,13 @@ jobs:
             -p 8080:8080 \
             ${{ secrets.DOCKER_USERNAME }}/chatpdf:latest
 
-      - name: Verify deployment
-        run: |
+            - name: Verify Deployment
+              run: |
           echo "Waiting for container to start..."
           sleep 10
-          if ! sudo docker ps | grep -q chatpdf; then
-            echo "Container failed to start"
+          if ! curl -s http://localhost:8080 | grep -q "Expected Output"; then
+            echo "App failed to start properly"
             sudo docker logs chatpdf
             exit 1
           fi
+
