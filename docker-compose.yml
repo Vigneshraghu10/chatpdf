@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  chatpdf:
+    image: ${{ secrets.DOCKER_USERNAME }}/chatpdf:latest
+    container_name: chatpdf
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - chatpdf
