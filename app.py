@@ -6,7 +6,7 @@ from werkzeug.utils import secure_filename
 import json
 import threading
 import time
-import fitz  # PyMuPDF
+import fitz  
 import base64
 import logging
 from pathlib import Path
